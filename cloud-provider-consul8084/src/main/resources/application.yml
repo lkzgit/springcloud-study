@@ -1,0 +1,19 @@
+#表示注册到consul服务器的支付服务提供者端口号
+server:
+  port: 8084
+
+
+#服务别名----注册consul到注册中心名称
+spring:
+  application:
+    name: cloud-consul-provider
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #hostname: 127.0.0.1
+        service-name: ${spring.application.name}
+
+
+

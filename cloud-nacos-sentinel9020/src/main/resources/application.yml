@@ -1,0 +1,33 @@
+server:
+  port: 9020
+
+spring:
+  application:
+    name: nacos-sentinel  #配置集群 服务名字要统一
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+      datasource: #做sentinel做持久化配置
+        ds1: #数据源1
+          nacos:
+            server-addr: localhost:8848
+            dataId: {spring.application.name} #nacos-sentinel
+            groupId: DEFAULT_GROUP #默认分组
+            data-type: json
+            rule-type: flow
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+feign:
+  sentinel:
+    enabled: true # 激活Sentinel对Feign的支持

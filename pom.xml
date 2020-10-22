@@ -30,6 +30,18 @@
         <module>cloud-stream-rabbitmq-consumer8802</module>
         <module>cloud-stream-rabbitmq-consumer8803</module>
         <module>cloud-stream-rabbitmq-provider8801</module>
+        <module>cloud-nacos-provider9050</module>
+        <module>cloud-nacos-provider9051</module>
+        <module>cloud-nacos-consumer9001</module>
+        <module>cloud-nacos-client9100</module>
+        <module>cloud-nacos-sentinel9020</module>
+        <module>cloud-nacos-consumer9002</module>
+        <module>cloud-nacos-provider9052</module>
+        <module>cloud-nacos-provider9053</module>
+        <module>cloud-nacos-seate-account</module>
+        <module>cloud-nacos-seata-order</module>
+        <module>cloud-nacos-seate-storage</module>
+
     </modules>
 
 
@@ -65,7 +77,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--spring cloud alibaba 2.1.0.RELEASE-->
+            <!--spring cloud alibaba 2.1.0.RELEASE 使用ali的时候引入该依赖-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

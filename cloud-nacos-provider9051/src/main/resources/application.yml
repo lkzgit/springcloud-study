@@ -1,0 +1,16 @@
+server:
+  port: 9051
+
+spring:
+  application:
+    name: nacos-provider  #配置集群 服务名字要统一
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

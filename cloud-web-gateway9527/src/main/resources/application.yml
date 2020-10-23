@@ -15,7 +15,7 @@ spring:
           uri: http://localhost:8081          #匹配后提供服务的路由地址
           #uri: lb://cloud-payment-service #匹配后提供服务的路由地址  根据euerke服务名匹配路由
           predicates:
-            - Path=/provider/**
+            - Path=/provider/**   #CloudPaymentService  服务的名字 请求前加这个
 
         - id: order_routh
           uri: http://localhost:8000

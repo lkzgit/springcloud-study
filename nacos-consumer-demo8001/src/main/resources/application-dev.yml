@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: demoNacos
+  cloud:
+    nacos:
+      #服务注册与发现
+      discovery:
+        namespace: 936cf895-8115-421d-8377-ab6339becd09
+        service: ${spring.application.name}
+        server-addr: 119.29.120.60:8848
+
+server:
+  port: 18080

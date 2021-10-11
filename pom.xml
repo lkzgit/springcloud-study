@@ -42,6 +42,8 @@
         <module>cloud-nacos-seata-order</module>
         <module>cloud-nacos-seate-storage</module>
         <module>nacos-consumer-demo8001</module>
+        <module>nacos-provider-demo9001</module>
+        <module>nacos-config-demo7001</module>
 
     </modules>
 

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nacos-consumer-demo8001</artifactId>
+    <artifactId>nacos-provider-demo9001</artifactId>
 
     <properties>
         <java.version>1.8</java.version>
@@ -29,19 +29,20 @@
         </dependency>
 
         <!-- 引入 Spring Cloud Alibaba Nacos Config 相关依赖，将 Nacos 作为配置中心，并实现对其的自动配置 -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--        </dependency>-->
         <!-- 引入 Spring Cloud Alibaba Nacos discovery 相关依赖，将 Nacos 作为注册发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!-- &lt;!&ndash;  监控      &ndash;&gt;-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- 引入自己定义的api通用包  -->
@@ -49,6 +50,10 @@
             <groupId>com.springcloud2020</groupId>
             <artifactId>cloud-api-common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <dependency>
@@ -62,22 +67,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--spring-cloud-starter-netflix-ribbon
-        nacos-discovery中提供了负载均衡 所以可以不用添加该依赖  -->
-<!--        <dependency>-->
-<!--             <groupId>org.springframework.cloud</groupId>-->
-<!--             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
-<!--         </dependency>-->
-
-
-        <!--spring-cloud-starter-openfeign-->
-       <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-
 
     </dependencies>
 

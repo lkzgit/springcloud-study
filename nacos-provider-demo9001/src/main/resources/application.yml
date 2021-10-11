@@ -1,0 +1,25 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: demo9001-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://119.29.120.60:8848
+        service: ${spring.application.name}
+        namespace: 936cf895-8115-421d-8377-ab6339becd09
+
+
+#springboot 提供监控功能
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

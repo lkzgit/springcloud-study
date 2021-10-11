@@ -14,6 +14,7 @@ spring:
         namespace: 936cf895-8115-421d-8377-ab6339becd09 #命名空间id
         #name: nacos-config-client  #使用的 Nacos 配置集的 dataId，默认为 spring.application.name
         group: DEFAULT_GROUP
-        file-extension: yaml #指定yaml格式的配置
-        refresh-enabled: true #配置是否自动刷新，默认true
-
+        file-extension: yml #指定yaml格式的配置 和dataId的后缀一致 默认yaml格式
+        refresh-enabled: false #配置是否自动刷新，默认true
+  profiles:
+    active: prod

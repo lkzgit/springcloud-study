@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,7 @@ public class DemoController {
         return discoveryClient.getInstances(service);
     }
 
+
     @GetMapping("/services")
     public Object services() {
         System.out.println(discoveryClient.description());
@@ -61,6 +63,12 @@ public class DemoController {
 
         return demoFeignOne.demoFeign();
 
+    }
+
+    //测试轮询算法
+    @GetMapping("/testRibbon")
+    public String testRibbon(){
+        return demoFeignOne.testRibbon();
     }
 
     @GetMapping("demo")

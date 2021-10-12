@@ -20,14 +20,17 @@ public class DemoOneProvider {
 
     @Value("${server.port}")
     private String port;
+//    @Value("${spring.cloud.nacos.discovery.cluster-name}")
+//    private String clustName;
     /**
      * @Author lkz
      * @Description //测试负载请求 对应consumer 中 restTemplate模式 不适用feign
      **/
     @GetMapping("demo")
     public String demo(){
-        return "nihao provider"+port;
+        return "nihao provider"+port+"-----";
     }
+
 
     @GetMapping("demoFeign")
     public String demoFeign(){
@@ -38,6 +41,12 @@ public class DemoOneProvider {
     public ResponseEntity index() {
         log.info("provider /");
         return new ResponseEntity("index", HttpStatus.OK);
+    }
+    //测试负载
+    @GetMapping("/testRibbon")
+    public String testRibbon() {
+        log.info("provider /testRibbon");
+        return "testRibbon--测试负载--"+port;
     }
 
     @GetMapping("/test")

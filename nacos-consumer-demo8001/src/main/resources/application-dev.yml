@@ -8,6 +8,15 @@ spring:
         namespace: 936cf895-8115-421d-8377-ab6339becd09
         service: ${spring.application.name}
         server-addr: 119.29.120.60:8848
+        #cluster-name: beijing #nacos集群名称
+    # Sentinel 配置项，对应 SentinelProperties 配置属性类
+    sentinel:
+      enabled: true # 是否开启。默认为 true 开启
+      eager: true # 是否饥饿加载。默认为 false 关闭
+      transport:
+        clientIp: 119.29.120.60  #地址被指定为CentOS的地址 解决 链接超时
+        dashboard: 119.29.120.60:81 # Sentinel 控制台地址
+        port: 8719
 
 server:
   port: 18080
@@ -16,3 +25,37 @@ server:
 #消费者将要去访问的微服务名称(注册成功进nacos的微服务提供者)
 service-url:
   nacos-user-service: http://demo9001-provider
+
+#开启饥饿加载 默认是懒加载 这个和feign没有关系 他的配置 超时什么的
+#ribbon:
+#  eager-load:
+#    enabled: true
+#指定那些服务开启饥饿加载 多个服务用逗号隔开 不配置 默认加载所有的
+#    clients: 服务名
+#超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 9000
+
+
+#  feign.client.config.29-nacos-discovery-provider.read-timeout=5000  #指定某个服务的设置
+#  feign.client.config.29-nacos-discovery-provider.connect-timeout=5000
+# feign使用httpClient的方式进行调用 默认httpclient
+#  feign.httpclient.enabled=true
+#  feign.httpclient.max-connections=200
+#  feign.httpclient.max-connections-per-route=50
+#feign:
+#  client:
+#    config:
+#      default:
+#        read-timeout: 2 #毫秒 读取时间
+#        connect-timeout: 2 #毫秒 连接时间
+#        logger-level: full #日志级别
+
+
+#暴露actuator端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

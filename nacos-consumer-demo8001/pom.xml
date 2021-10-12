@@ -28,11 +28,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 引入 Spring Cloud Alibaba Nacos Config 相关依赖，将 Nacos 作为配置中心，并实现对其的自动配置 -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--        </dependency>-->
         <!-- 引入 Spring Cloud Alibaba Nacos discovery 相关依赖，将 Nacos 作为注册发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -63,6 +58,12 @@
             </exclusions>
         </dependency>
 
+        <!--spring-boot-starter-actuator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!--spring-cloud-starter-netflix-ribbon
         nacos-discovery中提供了负载均衡 所以可以不用添加该依赖  -->
 <!--        <dependency>-->
@@ -77,6 +78,18 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
+        <!-- &lt;!&ndash;  监控      &ndash;&gt;-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
+        <!--spring-cloud-starter-alibaba-sentinel-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
 
 
     </dependencies>

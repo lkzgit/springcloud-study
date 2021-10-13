@@ -1,5 +1,7 @@
 package com.nacos.demo.config;
 
+import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
+import com.nacos.demo.exception.MyBlockHandlerClass;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,9 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class ApplicationContextConfig {
 
+    //支持sentinel 限流
+//    @SentinelRestTemplate(/*blockHandler="blockA", blockHandlerClass= MyBlockHandlerClass.class*/ //限流
+//            fallback="fallbackA", fallbackClass = MyBlockHandlerClass.class) // 降级
     @Bean
     @LoadBalanced // 负载均衡
     public RestTemplate getRestTemplate()

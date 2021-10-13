@@ -20,14 +20,16 @@ spring:
         port: 8719
 #      filter:
 #        url-patterns: /** # 拦截请求的地址。默认为 /*
+#        enabled: false // 关闭sentinel对controller的url的保护
 
 server:
   port: 18080
 
 
 #消费者将要去访问的微服务名称(注册成功进nacos的微服务提供者)
-service-url:
-  nacos-user-service: http://demo9001-provider
+service:
+  url:
+    provider: http://demo9001-provider
 
 #开启饥饿加载 默认是懒加载 这个和feign没有关系 他的配置 超时什么的
 #ribbon:
@@ -40,6 +42,11 @@ ribbon:
   ReadTimeout: 10000
   ConnectTimeout: 9000
 
+
+#开启restTemple对sentinel支持 false 关闭
+#resttemplate.sentinel.enabled=true
+#开启feign sentinel支持
+#feign.sentinel.enabled=true
 
 #  feign.client.config.29-nacos-discovery-provider.read-timeout=5000  #指定某个服务的设置
 #  feign.client.config.29-nacos-discovery-provider.connect-timeout=5000

@@ -32,7 +32,7 @@ public class DemoController {
     DiscoveryClient discoveryClient;
 
 
-    @Value("${service-url.nacos-user-service}")
+    @Value("${service.url.provider}")
     private String serverURL;
 
 

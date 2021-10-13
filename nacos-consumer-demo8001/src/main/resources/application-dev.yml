@@ -11,12 +11,15 @@ spring:
         #cluster-name: beijing #nacos集群名称
     # Sentinel 配置项，对应 SentinelProperties 配置属性类
     sentinel:
-      enabled: true # 是否开启。默认为 true 开启
+#      enabled: true # 是否开启。默认为 true 开启
       eager: true # 是否饥饿加载。默认为 false 关闭
       transport:
-        clientIp: 119.29.120.60  #地址被指定为CentOS的地址 解决 链接超时
-        dashboard: 119.29.120.60:81 # Sentinel 控制台地址
+        #clientIp: 119.29.120.60  #地址被指定为CentOS的地址 解决 链接超时
+        #dashboard: 119.29.120.60:81 # Sentinel 控制台地址
+        dashboard: localhost:81 # Sentinel 控制台地址 换成本来连接 是因为部署在服务器上 发送请求看不到请求
         port: 8719
+#      filter:
+#        url-patterns: /** # 拦截请求的地址。默认为 /*
 
 server:
   port: 18080

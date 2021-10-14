@@ -31,13 +31,13 @@ import java.util.List;
 //    @Override
 //    public void init() throws Exception {
 //        //可以根据需要指定规则文件的位置
-//        String ruleDir = System.getProperty("user.home") + "/sentinel/rules";
+//        String ruleDir = System.getProperty("user.home") + "/sentinel/rules";  //当前为用户名下
 //
-//        String flowRulePath = ruleDir + "/flow-rule.json";
-//        String degradeRulePath = ruleDir + "/degrade-rule.json";
-//        String paramFlowRulePath = ruleDir + "/param-flow-rule.json";
-//        String systemRulePath = ruleDir + "/system-rule.json";
-//        String authorityRulePath = ruleDir + "/authority-rule.json";
+//        String flowRulePath = ruleDir + "/flow-rule.json";  //流量规则
+//        String degradeRulePath = ruleDir + "/degrade-rule.json"; // 降级规则
+//        String paramFlowRulePath = ruleDir + "/param-flow-rule.json";  //参数规则
+//        String systemRulePath = ruleDir + "/system-rule.json";   // 系统规则
+//        String authorityRulePath = ruleDir + "/authority-rule.json";  //授权规则
 //
 //        this.mkdirIfNotExits(ruleDir);
 //

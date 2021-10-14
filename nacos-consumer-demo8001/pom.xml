@@ -78,12 +78,6 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!-- &lt;!&ndash;  监控      &ndash;&gt;-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
 
         <!--spring-cloud-starter-alibaba-sentinel-->
         <dependency>

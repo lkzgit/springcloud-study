@@ -80,8 +80,10 @@
  *      7.2.2 代码  见项目中的 FileDataSourceInit 类
  *
  *      7.2.3 配置spi
-            在项目 resources\FileDataSourceInit\FileDataSourceInit 包名类名全路径
- *
+            在项⽬的 resources/META-INF/services ⽬录下创建⽂件
+            ⽂件名： com.alibaba.csp.sentinel.init.InitFunc
+            内容为如下：
+ *              改成FileDataSourceInit的包名类名全路径即可
  *
  *      7.3  push :这种方式是将规则存储在nacos配置中心，微服务从nacos配置中心获取规则，
  这种方式有更好的实时性和一致性保证，生产环境下一般采用该方式（支持nacos、zookeeper、Apollo等）
@@ -106,7 +108,15 @@
             "grade": 1,
             "limitApp": "default",
             "strategy": 0
-          }
+          },
+          {
+            "resource": "abcd", //资源明
+            "controlBehavior": 0,
+            "count": 1.0, //每秒一个
+            "grade": 1,
+            "limitApp": "default",
+            "strategy": 0
+                    }
         ]
  *
  *

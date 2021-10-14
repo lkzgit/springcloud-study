@@ -1,6 +1,6 @@
 spring:
   application:
-    name: demoNacos
+    name: nacos-service-demo01
   cloud:
     nacos:
       #服务注册与发现

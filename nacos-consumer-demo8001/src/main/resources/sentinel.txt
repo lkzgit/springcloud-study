@@ -60,3 +60,53 @@
  *       6.8 exceptionsToIgnore ; 指定排除掉哪些异常。排除的异常不会计入异常统计，也不会进入fallback逻辑，而是原样抛出。否
  *       6.9 exceptionsToTrace ;  需要trace的异常    Throwable
  *
+ 7.sentinel持久化
+ *       三种持久化方式 原始模式, pull模式(拉模式),push模式(推模式)
+ *      7.1 原始模式; 这是默认模式，该模式下规则不持久化，重启微服务，配置的限流降级等规则都丢失
+ *      7.2 pull:  sentinel dashboard推送规则给微服务，微服务将规则更新到内存，同时将规则更新到本地文件，以实现规则的持久化
+            优点 ;简单易懂
+            缺点 ; 由于规则是⽤ FileRefreshableDataSource 定时更新的，所以规则更新会有延迟。如
+                 果FileRefreshableDataSource定时时间过⼤，可能⻓时间延迟；如果
+                 FileRefreshableDataSource过⼩，⼜会影响性能；
+                 规则存储在本地⽂件，如果有⼀天需要迁移微服务，那么需要把规则⽂件⼀起迁移，
+                 否则规则会丢失。
+
+ *      （拉模式）规则持久化到文件
+        <!--sentinel-datasource-extension数据源扩展-->
+        7.2.1  <dependency>
+                    <groupId>com.alibaba.csp</groupId>
+                    <artifactId>sentinel-datasource-extension</artifactId>
+                </dependency>
+ *      7.2.2 代码  见项目中的 FileDataSourceInit 类
+ *
+ *      7.2.3 配置spi
+            在项目 resources\FileDataSourceInit\FileDataSourceInit 包名类名全路径
+ *
+ *
+ *      7.3  push :这种方式是将规则存储在nacos配置中心，微服务从nacos配置中心获取规则，
+ 这种方式有更好的实时性和一致性保证，生产环境下一般采用该方式（支持nacos、zookeeper、Apollo等）
+                存在问题 ; 但是目前有一个小问题，当我们在sentinel dashboard控制台更新规则，nacos里面的规则并不能得到更新，后面补充
+        7.3.1 <!-- sentinel的nacos持久化 -->
+              <dependency>
+                   <groupId>com.alibaba.csp</groupId>
+                   <artifactId>sentinel-datasource-nacos</artifactId>
+              </dependency>
+        7.3.2 配置文件 application.properties配置持久化数据源
+        spring.cloud.sentinel.datasource.ds1.nacos.server-addr=192.168.172.128:80
+        spring.cloud.sentinel.datasource.ds1.nacos.data-id=${spring.application.name}.json
+        spring.cloud.sentinel.datasource.ds1.nacos.group-id=DEFAULT_GROUP
+        spring.cloud.sentinel.datasource.ds1.nacos.data-type=json
+        spring.cloud.sentinel.datasource.ds1.nacos.rule-type=flow
+        7.3.3 在nacos配置中心配置流控规则
+        [
+          {
+            "resource": "abc", //资源明
+            "controlBehavior": 0,
+            "count": 1.0,
+            "grade": 1,
+            "limitApp": "default",
+            "strategy": 0
+          }
+        ]
+ *
+ *

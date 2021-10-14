@@ -97,6 +97,16 @@
 <!--            <artifactId>sentinel-transport-simple-http</artifactId>-->
 <!--        </dependency>-->
 
+        <!--sentinel 持久化 文件方式 -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.csp</groupId>-->
+<!--            <artifactId>sentinel-datasource-extension</artifactId>-->
+<!--        </dependency>-->
+        <!--sentinel nacos数据持久化-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.csp</groupId>-->
+<!--            <artifactId>sentinel-datasource-nacos</artifactId>-->
+<!--        </dependency>-->
 
 
 

@@ -1,0 +1,62 @@
+ 1.流控模式：
+ *  直接 ：就是直接对该资源进行控制；
+ *  关联，关联某一个资源（/app2），被关联的资源/app2达到单机阈值，则限制当前资源/test的访问；
+ *  链路，记录指定链路上的流量； 入口资源就是  sentinel_spring_web_context
+ * 流控效果：
+ *      快速失败 ，直接限制
+ *      Warm Up，根据coldFactor（默认为3）的值，从 阈值/coldFactor，
+ * 经过预热的时长，才达到设置的QPS阈值，比如设置QPS阈值为100，那么100/3 =33，用33作为最初的阈值，
+ * 然后在10秒到达100后再开始限流
+ *      排队等待，在QPS阈值到达后，新的请求就等待，直到超时，可以适用于突发流量的请求 超时时间内还是到达阈值 就限流
+ 2.降级策略：
+ *      RT: 平均响应时间 (DEGRADE_GRADE_RT)，当 1s 内持续进入 N 个请求，
+ * 对应时刻的平均响应时间（秒级）均超过阈值（count，以 ms 为单位），那么在接下的时间窗口（DegradeRule 中的 timeWindow，
+ * 以 s 为单位）之内，对这个方法的调用都会自动地熔断（抛出 DegradeException），
+ * 走降级规则 当超过时间窗口的时间之后又会开始新一轮的判断
+ * 注意 Sentinel 默认统计的 RT 上限是 4900 ms，超出此阈值的都会算作 4900 ms，
+ * 若需要变更此上限可以通过启动配置项 -Dcsp.sentinel.statistic.max.rt=xxx 来配置；
+ *      异常比例：异常比例 (DEGRADE_GRADE_EXCEPTION_RATIO)是指当资源的每秒异常总数占通过量的比值
+ * 超过阈值（DegradeRule 中的 count）之后，
+ * 资源进入降级状态，即在接下的时间窗口（DegradeRule 中的 timeWindow，以 s 为单位）之内，
+ * 对这个方法的调用都会自动降级返回， 异常比率的阈值范围是 [0.0, 1.0]，代表 0% - 100%；
+ *      异常数：异常数 (DEGRADE_GRADE_EXCEPTION_COUNT)是指当资源近1分钟的异常数目超过阈值之后会进行熔断，
+ * 注意由于统计时间窗口是分钟级别的，若timeWindow小于 60s，则结束熔断状态后仍可能再进入熔断状态；
+ 3.热点规则  热点即经常访问的数据，很多时候我们希望统计某个热点数据中访问频次最高的 Top K 数据，并对其访问进行限制
+ *  热点规则需要使用@SentinelResource("app")注解，否则不生效
+ *  参数必须是7种基本数据类型才会生效   热点参数可以对某个具体的热点参数进行限流
+ *  参数例外项 中 参数值 与阈值设置同样限流 正常情况走上面设置的阈值
+ 4.系统规则 ;针对整个服务限流
+ *      4.1 Load，Load自适应（仅对Linux/Unix-like机器生效）：系统的load1作为启发指标，进行自适应系统保护，
+ *  当系统load1超过设定的启发值，且系统当前的并发线程数超过估算的系统容量时才会触发系统保护，
+ * 系统容量由系统的maxQps * minRt估算得出，设定参考值一般是 CPU cores * 2.5；
+ *      4.2.平均 RT：当单台机器上所有入口流量的平均RT达到阈值即触发系统保护，单位是毫秒；
+ *      4.3.并发线程数：当单台机器上所有入口流量的并发线程数达到阈值即触发系统保护；
+ *      4.4入口 QPS：当单台机器上所有入口流量的 QPS 达到阈值即触发系统保护；
+ *      4.5.CPU usage（1.5.0+ 版本）：当系统 CPU 使用率超过阈值即触发系统保护（取值范围 0.0-1.0），比较灵敏；
+ 5.授权规则
+ *     资源名：
+ *     流控应用：请求头中添加 MyRequestOriginParser
+ *     授权类型： 黑白名单
+ 6.@SentinelResource(value = "app")注解保护应用 参数值
+ *      6,1 value ;资源名 是
+ *      6,2 entryType ;entry类型，标记流量的方向，取值IN/OUT，默认是OUT  否
+ *      6,3 blockHandler ;处理BlockException的函数名称。函数要求：
+                          1. 必须是public
+                          2.返回类型与原方法一致
+                          3. 参数类型需要和原方法相匹配，并在最后加BlockException类型的参数。
+                          4. 默认需和原方法在同一个类中。若希望使用其他类的函数，可配置blockHandlerClass，
+                          并指定blockHandlerClass里面的方法  否
+ *       6.4 blockHandlerClass ; 存放blockHandler的类。对应的处理函数必须static修饰，否则无法解析，其他要求：同blockHandler 否
+ *       6.5 fallback ; 用于在抛出异常的时候提供fallback处理逻辑。fallback函数可以针对所有类型的异常（除了exceptionsToIgnore里面排除掉的异常类型）进行处理。函数要求：
+                        1. 返回类型与原方法一致
+                        2. 参数类型需要和原方法相匹配，Sentinel 1.6开始，也可在方法最后加Throwable类型的参数。
+                        3.默认需和原方法在同一个类中。若希望使用其他类的函数，可配置fallbackClass，并指定fallbackClass里面的方法  否
+ *       6.6 fallbackClass ; 存放fallback的类。对应的处理函数必须static修饰，否则无法解析，其他要求：同fallback 否
+ *       6.7 defaultFallback ; 用于通用的 fallback 逻辑。默认fallback函数可以针对所有类型的异常（除了exceptionsToIgnore里面排除掉的异常类型）进行处理。
+                    若同时配置了 fallback 和 defaultFallback，以fallback为准。函数要求：
+                               1. 返回类型与原方法一致
+                               2. 方法参数列表为空，或者有一个Throwable类型的参数。
+                               3. 默认需要和原方法在同一个类中。若希望使用其他类的函数，可配置fallbackClass，并指定fallbackClass里面的方法。
+ *       6.8 exceptionsToIgnore ; 指定排除掉哪些异常。排除的异常不会计入异常统计，也不会进入fallback逻辑，而是原样抛出。否
+ *       6.9 exceptionsToTrace ;  需要trace的异常    Throwable
+ *

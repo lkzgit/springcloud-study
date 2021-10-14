@@ -19,4 +19,9 @@ public class DemoFeignOneBack implements DemoFeignOne {
     public String testRibbon() {
         return "testRibbon失败";
     }
+
+    @Override
+    public String testSentinel() {
+        return "sentinel back 失败";
+    }
 }

@@ -22,6 +22,11 @@ public class DemoFeignOneFallbackFactory implements FallbackFactory<DemoFeignOne
             public String testRibbon() {
                 return "轮询调用失败";
             }
+
+            @Override
+            public String testSentinel() {
+                return "sentinel 限流了 哈哈哈";
+            }
         };
     }
 }

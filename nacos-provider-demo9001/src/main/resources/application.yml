@@ -16,9 +16,10 @@ spring:
       enabled: true # 是否开启。默认为 true 开启
       eager: true # 是否饥饿加载。默认为 false 关闭
       transport:
-        clientIp: 119.29.120.60 # #地址被指定为CentOS的地址
-        dashboard: 119.29.120.60:81
-        port: 8719
+        #clientIp: 119.29.120.60 # #地址被指定为CentOS的地址
+        #dashboard: 119.29.120.60:81
+        dashboard: localhost:81
+        #port: 8719
 
 #springboot 提供监控功能
 management:

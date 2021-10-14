@@ -44,9 +44,13 @@ ribbon:
 
 
 #开启restTemple对sentinel支持 false 关闭
-#resttemplate.sentinel.enabled=true
+#resttemplate:
+#  sentinel:
+#    enabled: true
 #开启feign sentinel支持
-#feign.sentinel.enabled=true
+feign:
+  sentinel:
+    enabled: true
 
 #  feign.client.config.29-nacos-discovery-provider.read-timeout=5000  #指定某个服务的设置
 #  feign.client.config.29-nacos-discovery-provider.connect-timeout=5000

@@ -12,18 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author lkz
  * @date 2021/10/11 16:13
  * @description fallbackFactory = DemoFeignOneFallbackFactory.class,
+ * fallback 与 fallbackFactory 一个是聚合一个是分散
  *  configuration = FeignConfiguration.class
  */
 
-//@FeignClient(name = "demo9001-provider",
-//        fallback = DemoFeignOneBack.class
-//       )
-//@Component
+@FeignClient(name = "demo9001-provider",
+//        fallback = DemoFeignOneBack.class,
+        fallbackFactory = DemoFeignOneFallbackFactory.class,
+        configuration = FeignConfiguration.class
+       )
+@Component
 public interface DemoFeignOne {
 
     @GetMapping("/demoFeign")
     public String demoFeign();
     @GetMapping("/testRibbon")
     public String testRibbon();
+    @GetMapping("testSentinel")
+    public String testSentinel();
 
 }

@@ -15,8 +15,8 @@ public class MyBlockHandlerClass {
      * @return
      */
     public static String block(String a, String b, BlockException e) {
-        System.out.println("Block Handler--> " + a + "--" + b);
-        return "Block Handler.";
+        System.out.println(" restTemplate ----- Block Handler--> " + a + "--" + b);
+        return "restTemplate -----Block Handler.";
     }
 
     /**
@@ -30,8 +30,8 @@ public class MyBlockHandlerClass {
      */
     public static SentinelClientHttpResponse blockA(HttpRequest request,
                                                     byte[] body, ClientHttpRequestExecution execution, BlockException ex) {
-        System.err.println("block: " + ex.getClass().getCanonicalName());
-        return new SentinelClientHttpResponse("custom block info");
+        System.err.println(" restTemplate -----block: " + ex.getClass().getCanonicalName());
+        return new SentinelClientHttpResponse(" restTemplate -----custom block info");
     }
 
     /**
@@ -45,7 +45,7 @@ public class MyBlockHandlerClass {
      */
     public static SentinelClientHttpResponse fallbackA(HttpRequest request,
                                                        byte[] body, ClientHttpRequestExecution execution, BlockException ex) {
-        System.err.println("fallback: " + ex.getClass().getCanonicalName());
-        return new SentinelClientHttpResponse("custom fallback info");
+        System.err.println("restTemplate -----fallback: " + ex.getClass().getCanonicalName());
+        return new SentinelClientHttpResponse("restTemplate -----custom fallback info");
     }
 }

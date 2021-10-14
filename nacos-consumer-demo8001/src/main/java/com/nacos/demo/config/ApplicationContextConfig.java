@@ -16,8 +16,8 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationContextConfig {
 
     //支持sentinel 限流
-//    @SentinelRestTemplate(/*blockHandler="blockA", blockHandlerClass= MyBlockHandlerClass.class*/ //限流
-//            fallback="fallbackA", fallbackClass = MyBlockHandlerClass.class) // 降级
+    @SentinelRestTemplate(blockHandler="blockA", blockHandlerClass= MyBlockHandlerClass.class, //限流
+            fallback="fallbackA", fallbackClass = MyBlockHandlerClass.class) // 降级
     @Bean
     @LoadBalanced // 负载均衡
     public RestTemplate getRestTemplate()

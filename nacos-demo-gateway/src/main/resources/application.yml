@@ -1,0 +1,49 @@
+server:
+  port: 60
+spring:
+  application:
+    name: nacos-service-gateway
+  cloud:
+    nacos:
+      discovery:
+        namespace: 936cf895-8115-421d-8377-ab6339becd09
+        service: ${spring.application.name}
+        server-addr: 119.29.120.60:8848
+    gateway:
+#      globalcors:   #配置跨域
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - DELETE
+#              - PUT
+#              - OPTION
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: nacos-service-demo01
+          uri: lb://nacos-service-demo01
+          #uri: http://localhost:18080
+          predicates:
+            - Path=/demo/**
+            #- After=2020-08-15T22:35:25.335+08:00[Asia/Shanghai]
+            #- Before=2020-09-15T17:35:25.335+08:00[Asia/Shanghai]
+            #- Between=2020-08-13T17:35:25.335+08:00[Asia/Shanghai], 2020-08-14T17:35:25.335+08:00[Asia/Shanghai]
+            #- Cookie=token, 123456
+            #- Header=X-Request-Id, \d+
+            #- Query=token 只要请求中包含 token 属性的参数即可匹配路由
+            #- Query=keep, pu 当请求中包含 keep 属性并且参数值是以 pu 开头的长度为三位的字符串才会进行匹配和路由
+            #- Token=123456
+            #- AccessTime=下午6:00, 上午6:00
+            #- Method=GET,POST
+            #- RemoteAddr=192.168.0.1/16   # 路由谓词工厂使用源列表 满足改ip则会路由到此
+            #- Weight=group1,2  # 权重路由谓词工厂采用两个参数：group和weight（一个int），权重是按组计算的 当有另外一个服务在同一组的时候 配置 group1 ,8
+                              # 百分之20 会在这个上面 百分之80在另外一个上面
+            #参考地址 ；https://www.cnblogs.com/crazymakercircle/p/11704077.html
+#        filters:
+#          - AddRequestHeader=X-Request-red, blue #添加请求头
+#          - AddRequestParameter=color, red   #添加参数
+#          - RequestLog=prefix, gateway #我们自定义的filter

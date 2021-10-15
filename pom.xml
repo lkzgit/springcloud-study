@@ -44,6 +44,8 @@
         <module>nacos-consumer-demo8001</module>
         <module>nacos-provider-demo9001</module>
         <module>nacos-config-demo7001</module>
+        <module>nacos-demo-gateway</module>
+
 
     </modules>
 

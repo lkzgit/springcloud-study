@@ -41,7 +41,7 @@ spring:
             #- Query=token 只要请求中包含 token 属性的参数即可匹配路由
             #- Query=keep, pu 当请求中包含 keep 属性并且参数值是以 pu 开头的长度为三位的字符串才会进行匹配和路由
             #- Token=123456
-            #- AccessTime=下午6:00, 上午6:00
+            #- AccessTime=下午6:00, 上午6:00  #AccessTimeConfig 前缀
             #- Method=GET,POST
             #- RemoteAddr=192.168.0.1/16   # 路由谓词工厂使用源列表 满足改ip则会路由到此
             #- Weight=group1,2  # 权重路由谓词工厂采用两个参数：group和weight（一个int），权重是按组计算的 当有另外一个服务在同一组的时候 配置 group1 ,8

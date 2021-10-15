@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author lkz
  * @date 2021/10/13 10:10
- * @description @SentinelResource 注解实现限流
+ * @description @SentinelResource 注解实现限流 支持切面配置
  */
 @Configuration
 public class SentinelAspectConfiguration {

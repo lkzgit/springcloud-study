@@ -97,8 +97,8 @@
         spring.cloud.sentinel.datasource.ds1.nacos.server-addr=192.168.172.128:80
         spring.cloud.sentinel.datasource.ds1.nacos.data-id=${spring.application.name}.json
         spring.cloud.sentinel.datasource.ds1.nacos.group-id=DEFAULT_GROUP
-        spring.cloud.sentinel.datasource.ds1.nacos.data-type=json
-        spring.cloud.sentinel.datasource.ds1.nacos.rule-type=flow
+        spring.cloud.sentinel.datasource.ds1.nacos.data-type=json   读取培配置文件类型为json
+        spring.cloud.sentinel.datasource.ds1.nacos.rule-type=flow 路由存储规则
         7.3.3 在nacos配置中心配置流控规则
         [
           {
@@ -118,5 +118,13 @@
             "strategy": 0
                     }
         ]
+
+        resource：资源名，即限流规则的作用对象
+        limitApp：流控针对的调用来源，若为 default 则不区分调用来源
+        grade：限流阈值类型（QPS 或并发线程数）；0代表根据并发数量来限流，1代表根据QPS来进行流量控制
+        count：限流阈值
+        strategy：调用关系限流策略
+        controlBehavior：流量控制效果（直接拒绝、Warm Up、匀速排队）
+        clusterMode：是否为集群模式
  *
  *

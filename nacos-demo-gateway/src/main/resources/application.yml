@@ -9,6 +9,10 @@ spring:
         namespace: 936cf895-8115-421d-8377-ab6339becd09
         service: ${spring.application.name}
         server-addr: 119.29.120.60:8848
+    sentinel:
+      transport:
+        port: 8791
+        dashboard: localhost:81
     gateway:
 #      globalcors:   #配置跨域
 #        cors-configurations:

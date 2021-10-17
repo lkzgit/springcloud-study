@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @FeignClient(name = "demo9001-provider",
-//        fallback = DemoFeignOneBack.class,
+       // fallback = DemoFeignOneBack.class,
         fallbackFactory = DemoFeignOneFallbackFactory.class,
         configuration = FeignConfiguration.class
        )

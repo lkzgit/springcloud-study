@@ -26,7 +26,7 @@ public class DemoOneProvider {
      * @Author lkz
      * @Description //测试负载请求 对应consumer 中 restTemplate模式 不适用feign
      **/
-    @GetMapping("demo")
+    @GetMapping("/pro/demo")
     public String demo(){
         return "nihao provider"+port+"-----";
     }

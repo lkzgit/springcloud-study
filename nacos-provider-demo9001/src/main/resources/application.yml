@@ -19,7 +19,7 @@ spring:
         #clientIp: 119.29.120.60 # #地址被指定为CentOS的地址
         #dashboard: 119.29.120.60:81
         dashboard: localhost:81
-        #port: 8719
+        port: 8719
 
 #springboot 提供监控功能
 management:

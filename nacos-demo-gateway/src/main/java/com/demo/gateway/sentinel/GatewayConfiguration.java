@@ -59,7 +59,7 @@ public class GatewayConfiguration {
     }
     /**
      * 限流过滤器
-     * @return
+     * @return 容器启动能够加载filter
      */
     @Bean
     @Order(-1)
@@ -105,8 +105,8 @@ public class GatewayConfiguration {
     }
 
     // 处理gateway本身出现的异常结构
-    //@Bean("myErrorWebExceptionHandler")
-    //@Order(Ordered.HIGHEST_PRECEDENCE)
+//    @Bean("myErrorWebExceptionHandler")
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorWebExceptionHandler myErrorWebExceptionHandler(ErrorAttributes errorAttributes) {
 
         MyErrorWebExceptionHandler exceptionHandler = new MyErrorWebExceptionHandler(

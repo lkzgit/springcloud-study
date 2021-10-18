@@ -1,0 +1,41 @@
+server:
+  port: 1113
+spring:
+  application:
+    name: nacos-product
+  datasource:
+    url: jdbc:mysql://139.196.37.168:3306/seata_storage?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        namespace:
+        server-addr: 119.29.120.60:8848
+seata:
+  enabled: true
+  application-id: ${spring.application.name} # Seata 应用编号，默认为 ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group # Seata 事务组编号，用于 TC 集群名
+  enable-auto-data-source-proxy: true
+  # Seata 服务配置项，对应 ServiceProperties 类
+  service:
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      nacos-product-group: default
+#    grouplist:
+#      default: 119.29.120.60:8091
+
+  registry:
+    type: nacos # 注册中心类型，默认为 file
+    nacos:
+      cluster: default # 使用的 Seata 分组
+      namespace: # Nacos 命名空间
+      server-addr: 119.29.120.60:8848
+  config:
+    nacos:
+      namespace:
+      group: SEATA_GROUP
+      server-addr: 119.29.120.60:8848
+    type: nacos

@@ -45,6 +45,9 @@
         <module>nacos-provider-demo9001</module>
         <module>nacos-config-demo7001</module>
         <module>nacos-demo-gateway</module>
+        <module>nacos-seataAt-account</module>
+        <module>nacos-seataAt-order</module>
+        <module>nacos-seataAt-product</module>
 
 
     </modules>

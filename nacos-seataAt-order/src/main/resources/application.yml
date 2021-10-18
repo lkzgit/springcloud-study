@@ -12,7 +12,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        namespace: 9b6d6ab0-8309-4e81-9f89-82bb4a7e8b25"
+        namespace: 9b6d6ab0-8309-4e81-9f89-82bb4a7e8b25
         server-addr: 119.29.120.60:8848
 seata:
   enabled: true
@@ -25,7 +25,7 @@ seata:
     vgroup-mapping:
       nacos-order-group: default
 #    grouplist:
-#      default: 119.29.120.60:8091
+#      default: 119.29.120.60:8091 #连接事务协调器服务
   registry:
     type: nacos # 注册中心类型，默认为 file
     nacos:

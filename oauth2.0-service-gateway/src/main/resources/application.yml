@@ -1,0 +1,32 @@
+server:
+  port: 2222
+spring:
+  application:
+    name: oauth-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: oauth-consumer
+          uri: lb://oauth-consumer
+          predicates:
+            - Path=/consumer/**
+        - id: oauth-prouce
+          uri: lb://oauth-produce
+          predicates:
+            - Path=/produce/**
+        - id: oauth-service
+          uri: lb://oauth-service
+          predicates:
+            - Path=/oauth/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true

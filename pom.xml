@@ -48,6 +48,11 @@
         <module>nacos-seataAt-account</module>
         <module>nacos-seataAt-order</module>
         <module>nacos-seataAt-product</module>
+        <module>oauth2.0-service-consumer</module>
+        <module>oauth2.0-service-produce</module>
+        <module>oauth2.0-service-gateway</module>
+        <module>oauth2.0-service-oauth</module>
+        <module>oauth2.0-service-eureka</module>
 
 
     </modules>

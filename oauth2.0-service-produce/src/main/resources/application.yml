@@ -1,0 +1,14 @@
+server:
+  port: 2002
+  servlet:
+    context-path: /produce
+spring:
+  application:
+    name: oauth-produce
+
+
+eureka:
+  client:
+    service-url:
+      #单机
+      defaultZone: http://localhost:7001/eureka

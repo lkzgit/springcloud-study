@@ -53,6 +53,7 @@
         <module>oauth2.0-service-gateway</module>
         <module>oauth2.0-service-oauth</module>
         <module>oauth2.0-service-eureka</module>
+        <module>oauth2.0-service-common</module>
 
 
     </modules>
@@ -129,6 +130,8 @@
                 <version>${lombok.version}</version>
                 <optional>true</optional>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 

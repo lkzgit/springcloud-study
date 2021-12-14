@@ -1,7 +1,11 @@
 package com.oauth.gateway.filter;
 
 import com.demo.common.util.JwtUtil;
+import com.demo.common.util.ServletUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -13,6 +17,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.server.HttpServerResponse;
+import sun.net.httpserver.AuthFilter;
+
+import java.io.IOException;
 
 /**
  * 全局过滤器 :用于鉴权(获取令牌 解析 判断)
@@ -20,6 +28,8 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class AuthorizeFilter1 implements GlobalFilter, Ordered {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthorizeFilter1.class);
     private static final String AUTHORIZE_TOKEN = "Authorization";
 
 
@@ -28,8 +38,18 @@ public class AuthorizeFilter1 implements GlobalFilter, Ordered {
 
         //1.获取请求对象
         ServerHttpRequest request = exchange.getRequest();
+
         //2.获取响应对象
         ServerHttpResponse response = exchange.getResponse();
+        //获取请求的URI
+        String path = request.getURI().getPath();
+
+        //如果是登录、
+        if (path.startsWith("/user/login/tologin")) {
+            //放行
+            Mono<Void> filter = chain.filter(exchange);
+            return filter;
+        }
 
 
         //4.1 从头header中获取令牌数据
@@ -82,4 +102,15 @@ public class AuthorizeFilter1 implements GlobalFilter, Ordered {
     public int getOrder() {
         return 0;
     }
+
+    private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String msg)
+    {
+        log.error("[鉴权异常处理]请求路径:{}", exchange.getRequest().getPath());
+        return ServletUtils.webFluxResponseWriter(exchange.getResponse(), msg, HttpStatus.UNAUTHORIZED);
+    }
+
+
+
+
+
 }

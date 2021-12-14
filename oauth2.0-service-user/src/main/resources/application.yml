@@ -1,0 +1,15 @@
+server:
+  port: 1001
+  servlet:
+    context-path: /user
+
+spring:
+  application:
+    name: oauth-user
+
+
+eureka:
+  client:
+    service-url:
+      #单机
+      defaultZone: http://localhost:7001/eureka

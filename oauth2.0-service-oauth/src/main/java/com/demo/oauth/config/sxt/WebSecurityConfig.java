@@ -1,0 +1,40 @@
+package com.demo.oauth.config.sxt;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+/**
+ * @author lkz
+ * @version 1.0.0
+ * @ClassName WebSecurityConfig.java
+ * @Description TODO
+ * @createTime 2021年12月15日 23:41:00
+ */
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //设置所有的请求都要在登陆后才能访问
+        http.authorizeRequests().anyRequest().authenticated();
+        //给一个登录页面
+        http.formLogin();
+    }
+
+    //模拟在内存中创建一个用户
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth.inMemoryAuthentication() //内存方式设置一个用户
+                .withUser("lkz")
+                .password(passwordEncoder.encode("lkz"))
+                .authorities("sys:admin");
+    }
+}

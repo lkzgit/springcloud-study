@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -28,8 +29,9 @@ public class LoginController {
 
 
     @GetMapping("test")
-    public String login(){
-
+    public String login(HttpServletRequest request){
+        String authorization = request.getHeader("Authorization");
+        System.out.println(authorization);
         return "ok";
     }
 

@@ -74,8 +74,9 @@ public class AuthorizeFilter1 implements GlobalFilter, Ordered {
         // 如果没有令牌 则拦截
         if (StringUtils.isEmpty(token)) {
             //设置方法不允许被访问，405错误代码
-            response.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
-            return response.setComplete();
+//            response.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
+//            return response.setComplete();
+            return unauthorizedResponse(exchange,"token认证未通过");
         }
 
         //如果有令牌判断令牌是否有效
@@ -105,8 +106,8 @@ public class AuthorizeFilter1 implements GlobalFilter, Ordered {
 
     private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String msg)
     {
-        log.error("[鉴权异常处理]请求路径:{}", exchange.getRequest().getPath());
-        return ServletUtils.webFluxResponseWriter(exchange.getResponse(), msg, HttpStatus.UNAUTHORIZED);
+        log.error("getWay[鉴权异常处理]请求路径:{}", exchange.getRequest().getPath());
+        return ServletUtils.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, msg,0);
     }
 
 

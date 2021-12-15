@@ -1,7 +1,10 @@
 package com.oauth.gateway.filter;
 
 import com.demo.common.util.JwtUtil;
+import com.demo.common.util.ServletUtils;
 import io.jsonwebtoken.Claims;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -21,6 +24,9 @@ import reactor.core.publisher.Mono;
 //@Component
 public class AuthorizeFilter2 implements GlobalFilter, Ordered {
     private static final String AUTHORIZE_TOKEN = "Authorization";
+
+    private static final Logger log = LoggerFactory.getLogger(AuthorizeFilter2.class);
+
 
 
     @Override
@@ -103,4 +109,11 @@ public class AuthorizeFilter2 implements GlobalFilter, Ordered {
     public int getOrder() {
         return 0;
     }
+
+    private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String msg)
+    {
+        log.error("getWay---AuthorizeFilter2[鉴权异常处理]请求路径:{}", exchange.getRequest().getPath());
+        return ServletUtils.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, msg,0);
+    }
+
 }

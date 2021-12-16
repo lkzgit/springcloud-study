@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -28,6 +29,7 @@ import javax.annotation.Resource;
 @Configuration
 @EnableAuthorizationServer //开始授权服务器
 @EnableResourceServer  //开始资源服务器 表示改服务作为一个资源服务器 所有请求都必须携带token
+@EnableGlobalMethodSecurity(prePostEnabled = true) //security 里面的注解，所有的 方法级别的访问需要验证权限
 public class AuthorizationRedisConfig extends AuthorizationServerConfigurerAdapter {
 
     //注入 redis 的连接工厂

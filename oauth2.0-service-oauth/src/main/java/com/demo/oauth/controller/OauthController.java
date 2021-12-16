@@ -1,5 +1,6 @@
 package com.demo.oauth.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,4 +26,17 @@ public class OauthController {
     public Object getLoginInfo(Principal principal){
         return principal;
     }
+
+    @GetMapping("getadmin")
+    @PreAuthorize("hasAuthority('admin')")
+    public Object getAdmin(){
+        return "admin";
+    }
+
+    @GetMapping("getTest")
+    @PreAuthorize("hasAuthority('test')")
+    public Object getTest(){
+        return "test";
+    }
+
 }

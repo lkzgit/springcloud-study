@@ -17,8 +17,8 @@ spring:
         - id: oauth-service
           uri: lb://oauth-service
           predicates:
-            - Path=/oauth/**
-        - id: oauth-user
+            - Path=/oauth-service/**
+        - id: oauth-service
           uri: lb://oauth-user
           predicates:
             - Path=/user/**

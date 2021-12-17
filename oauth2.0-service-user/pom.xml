@@ -55,6 +55,12 @@
             <version>1.2.41</version>
         </dependency>
 
+        <!-- 资源服务器 oauth2 的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
     </dependencies>
 
 

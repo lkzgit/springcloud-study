@@ -20,9 +20,10 @@ security:
     client:
       client-id: api
       client-secret: api-secret
+        # 访问令牌获取 URL，自定义的 oauth/token 固定写法  oauth-service 认证服务的前缀 没有可不写
+      access-token-uri: http://127.0.0.1:9999/oauth-servce/oauth/token
     # OAuth2 Resource 配置，对应 ResourceServerProperties 类
     resource:
-      # 获得 Token 信息的 URL oauth/check_token 固定写法
-      token-info-uri: http://127.0.0.1:9999/oauth-service/oauth/check_token
-    # 访问令牌获取 URL，自定义的 oauth/token 固定写法  oauth-service 认证服务的前缀 没有可不写
-    access-token-uri: http://127.0.0.1:9999/oauth-servce/oauth/token
+      #资源服务器换取用户信息地址
+      user-info-uri: http://127.0.0.1:9999/oauth-service/getInfo
+

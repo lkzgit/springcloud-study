@@ -33,7 +33,7 @@
 // */
 //@Configuration
 //@EnableAuthorizationServer //开始授权服务器
-//@EnableResourceServer  //开始资源服务器 表示改服务作为一个资源服务器 所有请求都必须携带token
+////@EnableResourceServer  //开始资源服务器 表示改服务作为一个资源服务器 所有请求都必须携带token
 //@EnableGlobalMethodSecurity(prePostEnabled = true) //security 里面的注解，所有的 方法级别的访问需要验证权限
 //public class AuthorizationJWTConfig extends AuthorizationServerConfigurerAdapter {
 //

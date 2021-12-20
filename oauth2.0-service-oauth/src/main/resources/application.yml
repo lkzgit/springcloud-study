@@ -35,6 +35,8 @@ encrypt:
     password: changgou #证书密码
 
 eureka:
+#  instance:
+#    prefer-ip-address: true
   client:
     service-url:
       #单机

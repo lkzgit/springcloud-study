@@ -42,7 +42,6 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private JwtAccessTokenConverter jwtAccessTokenConverter;
     //SpringSecurity 用户自定义授权认证类
     @Resource
-    @Qualifier("hmUserDetailsService")
     UserDetailsService userDetailsService;
     //授权认证管理器
     @Resource
@@ -54,6 +53,15 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter);
+    }
+
+    /***
+     * 采用BCryptPasswordEncoder对密码进行编码
+     * @return
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     /***
@@ -87,7 +95,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.accessTokenConverter(jwtAccessTokenConverter)
                 .authenticationManager(authenticationManager)//认证管理器
-                .tokenStore(tokenStore())                       //令牌存储
+                .tokenStore(tokenStore())                     //令牌存储
                 .userDetailsService(userDetailsService);     //用户信息service
     }
 
@@ -115,10 +123,10 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private KeyProperties keyProperties;
 
     //客户端配置
-    @Bean
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
-    }
+//    @Bean
+//    public ClientDetailsService clientDetails() {
+//        return new JdbcClientDetailsService(dataSource);
+//    }
 
 
 

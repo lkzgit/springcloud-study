@@ -29,7 +29,7 @@ import java.util.List;
 /*****
  * 自定义授权认证类
  */
-@Service("hmUserDetailsService")
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Resource

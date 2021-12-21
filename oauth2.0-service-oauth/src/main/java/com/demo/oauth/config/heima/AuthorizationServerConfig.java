@@ -1,6 +1,7 @@
 package com.demo.oauth.config.heima;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,21 +33,22 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     //数据源，用于从数据库获取数据进行认证操作，测试可以从内存中获取
-    @Autowired
+    @Resource
     private DataSource dataSource;
-    @Autowired
+    @Resource
     PasswordEncoder passwordEncoder;
     //jwt令牌转换器
-    @Autowired
+    @Resource
     private JwtAccessTokenConverter jwtAccessTokenConverter;
     //SpringSecurity 用户自定义授权认证类
     @Resource
+    @Qualifier("hmUserDetailsService")
     UserDetailsService userDetailsService;
     //授权认证管理器
-    @Autowired
+    @Resource
     AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Resource
     private CustomUserAuthenticationConverter customUserAuthenticationConverter;
 
     @Bean
@@ -140,7 +142,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 //        accessTokenConverter.setUserTokenConverter(customUserAuthenticationConverter);
 //        return converter;
 //    }
-
+        //功能同上
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();

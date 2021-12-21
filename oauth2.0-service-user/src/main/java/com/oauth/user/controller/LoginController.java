@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -30,13 +31,15 @@ public class LoginController {
 
     @GetMapping("test")
     public String login(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        String value = cookies[0].getValue();//获取cookie 携带的值
         String authorization = request.getHeader("Authorization");
         System.out.println(authorization);
         return "ok";
     }
 
     @GetMapping("tologin")
-    public String toLogin(@RequestParam("name")String name,@RequestParam("pass")String pass){
+    public String toLogin(@RequestParam("name")String name, @RequestParam("pass")String pass, HttpServletResponse response){
         User user = new User();
         user.setName("33");
         user.setPass("$2a$10$uQj5zpivxuq4Yk4W8Ux5vOFfG3mlNHvjRKGHU0xymhMMmoDjFyX.O");
@@ -51,6 +54,8 @@ public class LoginController {
             //生成令牌
             String jwt = JwtUtil.createJWT(UUID.randomUUID().toString(), JSONUtil.toJsonStr(info),null);
             Cookie cookie = new Cookie("Authorization", jwt);
+            response.addCookie(cookie);
+            response.addHeader("Authorization",jwt);
             return "生成的token:"+jwt;
         }
         return  "err";

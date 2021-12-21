@@ -34,10 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //设置所有的请求都要在登陆后才能访问
-        http.authorizeRequests().anyRequest().authenticated();
-        //给一个登录页面
+
+        // 关闭跨站请求伪造
+        http.csrf().disable();
         http.formLogin();
+        http.authorizeRequests().anyRequest().authenticated();
     }
 
     //模拟在内存中创建一个用户
@@ -68,17 +69,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers(
-//                "/error",
-//                "/static/**",
-//                "/v2/api-docs/**",
-//                "/swagger-resources/**",
-//                "/webjars/**",
-//                "/favicon.ico"
-//        );
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/error",
+                "/static/**",
+                "/v2/api-docs/**",
+                "/swagger-resources/**",
+                "/webjars/**",
+                "/favicon.ico"
+        );
+    }
 
 
 }

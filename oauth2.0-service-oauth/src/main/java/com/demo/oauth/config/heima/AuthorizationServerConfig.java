@@ -31,11 +31,11 @@ import java.security.KeyPair;
 
 @Configuration
 @EnableAuthorizationServer
-class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     //数据源，用于从数据库获取数据进行认证操作，测试可以从内存中获取
     @Resource
     private DataSource dataSource;
-    @Resource
+    @Resource(name = "BCryptPassword")
     PasswordEncoder passwordEncoder;
     //jwt令牌转换器
     @Resource
@@ -59,7 +59,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
      * 采用BCryptPasswordEncoder对密码进行编码
      * @return
      */
-    @Bean
+    @Bean("BCryptPassword")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -73,15 +73,16 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
       // clients.jdbc(dataSource).clients(clientDetails());
       clients.inMemory()
-                .withClient("changgou")          //客户端id
-                .secret(passwordEncoder.encode("changgou"))                     //秘钥
+                .withClient("happyShop")          //客户端id
+                .secret(passwordEncoder.encode("happyShop"))                     //秘钥
                 .redirectUris("http://localhost")       //重定向地址
                 .accessTokenValiditySeconds(3600)          //访问令牌有效期
                 .refreshTokenValiditySeconds(3600)         //刷新令牌有效期
                 .authorizedGrantTypes(
                         "authorization_code",          //根据授权码生成令牌
                         "client_credentials",          //客户端认证
-                        "refresh_token",                //刷新令牌
+                        "refresh_token",                 //刷新令牌
+                        "implicit",                 //静默登录
                         "password")                     //密码方式认证
                 .scopes("app");                         //客户端范围，名称自定义，必填
     }

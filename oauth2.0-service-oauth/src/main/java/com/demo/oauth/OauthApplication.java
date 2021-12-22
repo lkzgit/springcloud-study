@@ -40,6 +40,10 @@ public class OauthApplication {
      * isAuthenticated，对应 public final boolean isAuthenticated() 方法，含义为身份证认证后访问。
      * isRememberMe，对应 public final boolean isRememberMe() 方法，含义为记住我用户操作访问。
      * isFullyAuthenticated，对应 public final boolean isFullyAuthenticated() 方法，含义为非匿名且非记住我用户允许访问。
+     *
+     * AuthorizationEndpoint 服务于认证请求。默认 URL： /oauth/authorize 。
+     * TokenEndpoint 服务于访问令牌的请求。默认 URL： /oauth/token
+     *
      */
 
 }

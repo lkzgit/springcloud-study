@@ -35,14 +35,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     //数据源，用于从数据库获取数据进行认证操作，测试可以从内存中获取
     @Resource
     private DataSource dataSource;
-    @Resource(name = "BCryptPassword")
-    PasswordEncoder passwordEncoder;
+
     //jwt令牌转换器
     @Resource
     private JwtAccessTokenConverter jwtAccessTokenConverter;
     //SpringSecurity 用户自定义授权认证类
     @Resource
-    UserDetailsService userDetailsService;
+    UserDetailsServiceImpl userDetailsService;
     //授权认证管理器
     @Resource
     AuthenticationManager authenticationManager;
@@ -59,7 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * 采用BCryptPasswordEncoder对密码进行编码
      * @return
      */
-    @Bean("BCryptPassword")
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -73,8 +72,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
       // clients.jdbc(dataSource).clients(clientDetails());
       clients.inMemory()
-                .withClient("happyShop")          //客户端id
-                .secret(passwordEncoder.encode("happyShop"))                     //秘钥
+                .withClient("changgou")          //客户端id
+                .secret(passwordEncoder().encode("changgou"))                     //秘钥
                 .redirectUris("http://localhost")       //重定向地址
                 .accessTokenValiditySeconds(3600)          //访问令牌有效期
                 .refreshTokenValiditySeconds(3600)         //刷新令牌有效期

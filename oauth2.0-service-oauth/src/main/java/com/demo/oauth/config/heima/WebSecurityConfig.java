@@ -15,12 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.annotation.Resource;
+
 @Configuration
 @EnableWebSecurity
-@Order(-1)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-      @Autowired
+      @Resource(name="userDetailsServiceImpl")
        private UserDetailsServiceImpl userDetailService;
 
     /***

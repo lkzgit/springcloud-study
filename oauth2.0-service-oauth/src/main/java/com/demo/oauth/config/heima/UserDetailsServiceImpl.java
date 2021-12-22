@@ -29,7 +29,7 @@ import java.util.List;
 /*****
  * 自定义授权认证类
  */
-@Service
+@Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Resource
@@ -106,11 +106,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return null;
         }
 
-
-
-
-//    public static void main(String[] args) {
-//        String zhangsan = new BCryptPasswordEncoder().encode("changgou");
-//        System.out.println(zhangsan);
-//    }
 }

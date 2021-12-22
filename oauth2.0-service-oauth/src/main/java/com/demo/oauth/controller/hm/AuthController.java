@@ -1,4 +1,4 @@
-package com.demo.oauth.controller;
+package com.demo.oauth.controller.hm;
 
 import com.demo.common.result.Result;
 import com.demo.oauth.service.AuthService;

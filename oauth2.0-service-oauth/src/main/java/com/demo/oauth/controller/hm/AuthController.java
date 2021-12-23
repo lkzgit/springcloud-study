@@ -62,7 +62,7 @@ public class AuthController {
         //将令牌存储到cookie
         saveCookie(access_token);
 
-        return Result.ok();
+        return Result.ok(authToken);
     }
 
     /***

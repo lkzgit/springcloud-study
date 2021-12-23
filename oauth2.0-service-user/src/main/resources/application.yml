@@ -17,11 +17,11 @@ eureka:
 security:
   oauth2:
     # OAuth2 Client 配置，对应 OAuth2ClientProperties 类
-    client:
-      client-id: api
-      client-secret: api-secret
+    #client:
+      #client-id: changgou
+      #client-secret: changgou
         # 访问令牌获取 URL，自定义的 oauth/token 固定写法  oauth-service 认证服务的前缀 没有可不写
-      access-token-uri: http://127.0.0.1:9999/oauth-servce/oauth/token
+      #access-token-uri: http://127.0.0.1:9999/oauth-servce/oauth/token
     # OAuth2 Resource 配置，对应 ResourceServerProperties 类
     resource:
       #资源服务器换取用户信息地址

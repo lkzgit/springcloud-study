@@ -21,9 +21,8 @@ import java.nio.charset.Charset;
  * @date 2021/12/17 15:38
  * @description 资源服务器 处理梅西验证都去授权服务器去验证问题
  */
-@EnableResourceServer //开启资源服务器 下面的url都被保护起来
+
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserResourceConfig extends ResourceServerConfigurerAdapter {
 
     @Bean
@@ -42,7 +41,7 @@ public class UserResourceConfig extends ResourceServerConfigurerAdapter {
         // 需要一个sign签名 这叫对称加密
 //        jwtAccessTokenConverter.setSigningKey("oauth2");
         // 非对称加密的解密
-        ClassPathResource resource = new ClassPathResource("public.txt");
+        ClassPathResource resource = new ClassPathResource("public.key");
         String publicKey = null;
         try {
             // 都成string字符串

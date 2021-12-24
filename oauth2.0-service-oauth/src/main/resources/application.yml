@@ -34,6 +34,7 @@ encrypt:
     alias: changgou #证书别名
     password: changgou #证书密码
 
+
 eureka:
 #  instance:
 #    prefer-ip-address: true
@@ -48,3 +49,12 @@ ribbon:
   MaxAutoRetries: 1 #同一台实例最大重试次数,不包括首次调用
   MaxAutoRetriesNextServer: 1 #重试负载均衡其他的实例最大重试次数,不包括首次调用
   OkToRetryOnAllOperations: false
+security:
+  oauth2:
+    client:
+      client-id: lkz
+      client-secret: lkz
+      access-token-uri: http://localhost:9999/oauth-service/oauth/token
+    resource:
+      token-info-uri: http://localhost:9999/oauth-service/oauth/check_token
+      user-info-uri: http://localhost:9999/oauth-service/getInfo

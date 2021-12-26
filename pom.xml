@@ -55,6 +55,7 @@
         <module>oauth2.0-service-eureka</module>
         <module>oauth2.0-service-common</module>
         <module>oauth2.0-service-user</module>
+        <module>oauth2.0-newService</module>
 
 
     </modules>

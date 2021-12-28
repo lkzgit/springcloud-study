@@ -17,6 +17,7 @@ import java.security.Principal;
 public class OauthController {
 
     @GetMapping("testOauth")
+    @PreAuthorize("hasAuthority('test')")
     public String testOauth(){
         return "oauth---服务";
     }

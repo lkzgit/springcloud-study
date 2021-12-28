@@ -2,6 +2,7 @@ package com.oauth.demo.config;
 
 import com.oauth.demo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +35,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     private UserServiceImpl userService;
 
     @Autowired
+    @Qualifier("redisTokenStore")
     private TokenStore tokenStore;
 
 
@@ -98,5 +100,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                  */
                 .authorizedGrantTypes("authorization_code","implicit","password","client_credentials","refresh_token");
     }
+
 
 }
